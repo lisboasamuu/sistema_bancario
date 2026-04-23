@@ -1,0 +1,12 @@
+{
+    "123.456.789-10": {
+        "titular": "Samuel",
+        "saldo": 10000,
+        "historico": [
+            "Depósito de +R$10,000.00 realizado",
+            "Depósito de +R$10,000.00 realizado",
+            "Saque de -5,000.00 realizado",
+            "Saque de -5,000.00 realizado"
+        ]
+    }
+}
