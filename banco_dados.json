@@ -8,5 +8,10 @@
             "Saque de -5,000.00 realizado",
             "Saque de -5,000.00 realizado"
         ]
+    },
+    "145.678.987-11": {
+        "titular": "Gabrielly",
+        "saldo": 0,
+        "historico": []
     }
 }

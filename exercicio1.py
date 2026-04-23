@@ -126,7 +126,7 @@ class Banco:
         for cpf, conta in self.contas.items():
             dados[cpf] = conta.to_dict()
         JSONStorage.save(dados, self.arquivo_dados)
-        print('dados salvo com sucesso.')
+        print('\nDados salvo com sucesso.')
 
     def carregar_dados(self):
         dados = JSONStorage.load(self.arquivo_dados)
@@ -136,8 +136,34 @@ class Banco:
         self.contas = {}
         for cpf, dados_contas in dados.items():
             self.contas[cpf] = Conta.from_dict(dados_contas)
-        print(f'Dados carregados e {len(self.contas)} conta(s) restaurada(s)')
+        print(f'\nDados carregados e {len(self.contas)} conta(s) restaurada(s)')
 
-banco = Banco()
+def main():
+    banco = Banco()
+    while True:
+        print("\n" + "=" * 50)
+        print("          🏦 SISTEMA BANCÁRIO LISBOA")
+        print("=" * 50)
+        print("1️⃣  Criar nova conta")
+        print("2️⃣  Depositar")
+        print("3️⃣  Sacar")
+        print("4️⃣  Consultar saldo")
+        print("5️⃣  Ver histórico de movimentações")
+        print("6️⃣  Listar todas as contas")
+        print("0️⃣  Sair")
+        print("=" * 50)
 
-banco.saque('123.456.789-10', 5000)
+        opcao = input('Escolha uma opção: ').strip()
+        if opcao == '0':
+            print('\nO 🏦 SISTEMA BANCÁRIO LISBOA AGRADECE!\n')
+            break
+        elif opcao == '1':
+            cpf = input('insira seu cpf: ').strip()
+            nome = input('insira seu nome: ').strip()
+            banco.criar_conta(cpf, nome)
+        elif opcao == '2':
+            cpf = input('insira o CPF do titular: ').strip()
+            
+
+if __name__ == "__main__":
+    main()
