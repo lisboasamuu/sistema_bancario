@@ -51,10 +51,8 @@ sistema_bancario/
 │   ├── utils.py
 │   ├── main.py
 │   └── gui.py
-│
 ├── data/
 │   └── banco_dados.json
-│
 ├── tests/
 ├── run.py
 ├── run_gui.py
