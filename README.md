@@ -1,161 +1,100 @@
-# 🐍 Python Avançado — Exercícios Práticos
+# 🏦 Sistema Bancário em Python
 
-Este repositório reúne desafios de **nível avançado em Python**, com foco em conceitos fundamentais utilizados no desenvolvimento real de software.
+Sistema simples de gerenciamento bancário com persistência de dados em JSON, desenvolvido para fins de estudo e prática de programação orientada a objetos, manipulação de arquivos e estruturação de projetos.
 
-A proposta é ir além da sintaxe básica e trabalhar com **estrutura, organização de código e boas práticas**.
+## ✨ Funcionalidades
 
----
+- Criar conta (CPF e nome do titular)
+- Depositar valores
+- Sacar valores (com verificação de saldo)
+- Transferir valores entre contas
+- Consultar saldo
+- Visualizar histórico de movimentações (depósitos, saques, transferências)
+- Listar todas as contas cadastradas
+- Persistência automática dos dados em arquivo JSON
+- Carregamento automático dos dados ao iniciar o programa
 
-## 🚀 Objetivo
+## 🛠️ Tecnologias utilizadas
 
-Desenvolver habilidades práticas em:
+- Python 3.10+
+- Módulo `json` para persistência
+- Apenas bibliotecas padrão – sem dependências externas
 
-* Programação orientada a objetos (POO)
-* Manipulação de arquivos
-* Uso de decorators
-* Funções de ordem superior
-* Otimização com cache (memoization)
-* Tratamento de erros
+## 📁 Estrutura do projeto
+sistema_bancario/
+├── src/ # Código fonte
+│ ├── init.py # Torna src um pacote
+│ ├── main.py # Loop principal e menu interativo
+│ ├── banco.py # Classe Banco (gerenciamento de contas)
+│ ├── conta.py # Classe Conta (lógica de operações)
+│ ├── storage.py # Classe JSONStorage (leitura/escrita JSON)
+│ └── utils.py # Funções auxiliares (ex: normalizar CPF)
+├── data/ # Dados persistentes
+│ └── banco_dados.json # Arquivo gerado automaticamente
+├── tests/ # (Opcional) Testes unitários
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .gitattributes
+└── run.py # Script de entrada na raiz
 
----
 
-## 🧠 Exercício 1 — Mini Sistema Bancário
+## 🚀 Como executar
 
-Implementação de um sistema bancário utilizando **classes** e persistência de dados.
+### 1. Clone ou baixe o repositório
 
-### 📌 Estrutura:
+git clone https://github.com/seu-usuario/sistema_bancario.git
+cd sistema_bancario
+python run.py
+Ou alternativamente:
+python -m src.main
 
-* Classe `Conta`
+Siga o menu
+==================================================
+          🏦 SISTEMA BANCÁRIO
+==================================================
+1️⃣  Criar nova conta
+2️⃣  Depositar
+3️⃣  Sacar
+4️⃣  Transferir
+5️⃣  Consultar saldo
+6️⃣  Ver histórico de movimentações
+7️⃣  Listar todas as contas
+0️⃣  Sair
+==================================================
 
-  * `titular`
-  * `saldo`
-  * `historico`
+## 💾 Persistência
+Os dados são salvos automaticamente em data/banco_dados.json após cada operação que modifica o estado (criar conta, depositar, sacar, transferir).
 
-* Métodos:
+Ao iniciar, o banco carrega automaticamente o arquivo JSON se ele existir.
 
-  * `depositar(valor)`
-  * `sacar(valor)`
-  * `transferir(conta_destino, valor)`
+O formato JSON é legível e pode ser editado manualmente (com cuidado).
 
-* Classe `Banco`
+🔧 Requisitos
+Python 3.10 ou superior (testado com 3.12)
 
-  * Gerencia múltiplas contas usando dicionário
+Nenhuma biblioteca externa necessária
 
----
+## 🐛 Possíveis problemas e soluções
+Problema	S
+KeyError: 'historico' ao carregar dados	O JSON foi gerado por uma versão antiga. Apague data/banco_dados.json e recrie as contas, ou adicione "historico": [] manualmente no arquivo.
 
-### 💾 Persistência de Dados:
 
-* Salvamento em arquivo (`.json` ou `.txt`)
-* Carregamento automático ao iniciar o sistema
+Erro ao depositar/sacar/transferir com valores negativos:	O programa bloqueia valores negativos e exibe mensagem de erro.
 
----
+### 📝 Licença
+Este projeto está sob a licença MIT – veja o arquivo LICENSE para detalhes.
 
-### 🧾 Exemplo de histórico:
+### 👤 Autor
+Samuel Lisboa - @lisboasamuu
 
-```id="lq8c0g"
-+100 depósito
--50 saque
--> transferência para João
-```
+## 📌 Melhorias futuras (ideias)
+Limitar número de transferências por dia
 
----
+Gerar extrato em PDF
 
-## 🔄 Exercício 2 — Decorator de Log
+Interface gráfica (Tkinter ou PyQt)
 
-Criação de um **decorator personalizado** para monitoramento de funções.
+Suporte a contas poupança e corrente com regras diferentes
 
-### 📌 Funcionalidades:
-
-* Registrar:
-
-  * Nome da função
-  * Argumentos recebidos
-  * Valor de retorno
-
-* Armazenar logs em arquivo `log.txt`
-
----
-
-### 🧪 Exemplo:
-
-```python id="r9m3kt"
-@log
-def soma(a, b):
-    return a + b
-```
-
----
-
-### 🔥 Funcionalidades extras:
-
-* Registro de exceções (`try/except`)
-* Medição de tempo de execução da função
-
----
-
-## 🧩 Exercício 3 — Sistema de Cache (Memoization)
-
-Implementação manual de um sistema de cache para otimizar chamadas de funções.
-
-### 📌 Objetivo:
-
-* Evitar recomputação de resultados
-* Melhorar performance
-
----
-
-### 🧪 Exemplo:
-
-```python id="8drn4h"
-@cache
-def fib(n):
-    if n <= 1:
-        return n
-    return fib(n-1) + fib(n-2)
-```
-
----
-
-### 🔥 Funcionalidades extras:
-
-* Implementação sem `functools`
-* Contagem de execuções reais da função
-* Comparação de performance (com vs sem cache)
-
----
-
-## 🧠 Conceitos Aplicados
-
-* Classes e objetos (`__init__`, métodos)
-* Decorators
-* Funções como argumento
-* Estruturas de dados (listas e dicionários)
-* Leitura e escrita em arquivos
-* Tratamento de erros com `try/except`
-
----
-
-## 😈 Desafio Extra
-
-Integração de todos os conceitos em um único projeto:
-
-* Sistema bancário com:
-
-  * Logs automáticos (decorators)
-  * Otimização de operações (cache)
-
----
-
-## 📌 Autor
-
-Desenvolvido por **Samuel Lisboa** 🚀
-
----
-
-## 📣 Contribuição
-
-Sinta-se à vontade para sugerir melhorias ou abrir issues!
-
-Se curtir o projeto, considere dar uma ⭐
-
----
+Autenticação com senha por conta
