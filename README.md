@@ -1,55 +1,86 @@
 # 🏦 Sistema Bancário em Python
 
-Sistema simples de gerenciamento bancário com persistência de dados em JSON, desenvolvido para fins de estudo e prática de programação orientada a objetos, manipulação de arquivos e estruturação de projetos.
+Sistema simples de gerenciamento bancário com persistência de dados em JSON, desenvolvido para estudo de:
+
+* Programação Orientada a Objetos (POO)
+* Manipulação de arquivos
+* Estruturação de projetos reais em Python
+
+---
 
 ## ✨ Funcionalidades
 
-- Criar conta (CPF e nome do titular)
-- Depositar valores
-- Sacar valores (com verificação de saldo)
-- Transferir valores entre contas
-- Consultar saldo
-- Visualizar histórico de movimentações (depósitos, saques, transferências)
-- Listar todas as contas cadastradas
-- Persistência automática dos dados em arquivo JSON
-- Carregamento automático dos dados ao iniciar o programa
+* Criar conta (CPF e nome do titular)
+* Depositar valores
+* Sacar valores (com verificação de saldo)
+* Transferir valores entre contas
+* Consultar saldo
+* Visualizar histórico de movimentações
+* Listar todas as contas cadastradas
+* Persistência automática em JSON
+* Carregamento automático ao iniciar
+
+---
 
 ## 🛠️ Tecnologias utilizadas
 
-- Python 3.10+
-- Módulo `json` para persistência
-- Apenas bibliotecas padrão – sem dependências externas
+* Python 3.10+
+* Módulo `json` (nativo)
+* Sem dependências externas
+
+---
 
 ## 📁 Estrutura do projeto
+
+```
 sistema_bancario/
-├── src/ # Código fonte
-│ ├── init.py # Torna src um pacote
-│ ├── main.py # Loop principal e menu interativo
-│ ├── banco.py # Classe Banco (gerenciamento de contas)
-│ ├── conta.py # Classe Conta (lógica de operações)
-│ ├── storage.py # Classe JSONStorage (leitura/escrita JSON)
-│ └── utils.py # Funções auxiliares (ex: normalizar CPF)
-├── data/ # Dados persistentes
-│ └── banco_dados.json # Arquivo gerado automaticamente
-├── tests/ # (Opcional) Testes unitários
+├── src/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── banco.py
+│   ├── conta.py
+│   ├── storage.py
+│   └── utils.py
+│
+├── data/
+│   └── banco_dados.json
+│
+├── tests/              # (Opcional)
 ├── README.md
 ├── LICENSE
 ├── .gitignore
 ├── .gitattributes
-└── run.py # Script de entrada na raiz
+└── run.py
+```
 
+---
 
 ## 🚀 Como executar
 
-### 1. Clone ou baixe o repositório
+### 1. Clone o repositório
 
+```bash
 git clone https://github.com/seu-usuario/sistema_bancario.git
 cd sistema_bancario
-python run.py
-Ou alternativamente:
-python -m src.main
+```
 
-Siga o menu
+### 2. Execute o projeto
+
+```bash
+python run.py
+```
+
+Ou:
+
+```bash
+python -m src.main
+```
+
+---
+
+## 🧭 Menu do sistema
+
+```
 ==================================================
           🏦 SISTEMA BANCÁRIO
 ==================================================
@@ -62,39 +93,81 @@ Siga o menu
 7️⃣  Listar todas as contas
 0️⃣  Sair
 ==================================================
+```
 
-## 💾 Persistência
-Os dados são salvos automaticamente em data/banco_dados.json após cada operação que modifica o estado (criar conta, depositar, sacar, transferir).
+---
 
-Ao iniciar, o banco carrega automaticamente o arquivo JSON se ele existir.
+## 💾 Persistência de dados
 
-O formato JSON é legível e pode ser editado manualmente (com cuidado).
+* Os dados são salvos automaticamente em:
 
-🔧 Requisitos
-Python 3.10 ou superior (testado com 3.12)
+  ```
+  data/banco_dados.json
+  ```
 
-Nenhuma biblioteca externa necessária
+* O salvamento ocorre após:
+
+  * Criar conta
+  * Depositar
+  * Sacar
+  * Transferir
+
+* Ao iniciar o sistema:
+
+  * O arquivo JSON é carregado automaticamente (se existir)
+
+* O JSON é legível e pode ser editado manualmente ⚠️ (com cuidado)
+
+---
+
+## 🔧 Requisitos
+
+* Python 3.10 ou superior
+  *(testado com Python 3.12)*
+
+---
 
 ## 🐛 Possíveis problemas e soluções
-Problema	S
-KeyError: 'historico' ao carregar dados	O JSON foi gerado por uma versão antiga. Apague data/banco_dados.json e recrie as contas, ou adicione "historico": [] manualmente no arquivo.
 
+| Problema                                  | Solução                                                                               |
+| ----------------------------------------- | ------------------------------------------------------------------------------------- |
+| `KeyError: 'historico'` ao carregar dados | JSON antigo. Apague `data/banco_dados.json` ou adicione `"historico": []` manualmente |
+| Valores negativos em operações            | O sistema bloqueia automaticamente e exibe erro                                       |
 
-Erro ao depositar/sacar/transferir com valores negativos:	O programa bloqueia valores negativos e exibe mensagem de erro.
+---
 
-### 📝 Licença
-Este projeto está sob a licença MIT – veja o arquivo LICENSE para detalhes.
+## 📝 Licença
 
-### 👤 Autor
-Samuel Lisboa - @lisboasamuu
+Este projeto está sob a licença **MIT**.
+Consulte o arquivo `LICENSE` para mais detalhes.
 
-## 📌 Melhorias futuras (ideias)
-Limitar número de transferências por dia
+---
 
-Gerar extrato em PDF
+## 👤 Autor
 
-Interface gráfica (Tkinter ou PyQt)
+**Samuel Lisboa**
+GitHub: @lisboasamuu
 
-Suporte a contas poupança e corrente com regras diferentes
+---
 
-Autenticação com senha por conta
+## 📌 Melhorias futuras
+
+* Limite de transferências por dia
+* Geração de extrato em PDF
+* Interface gráfica (Tkinter ou PyQt)
+* Tipos de conta (corrente/poupança)
+* Autenticação por senha
+
+---
+
+## 🧠 Observação técnica
+
+Esse projeto já demonstra:
+
+* Separação de responsabilidades (Banco vs Conta vs Storage)
+* Persistência desacoplada
+* Estrutura modular (nível de projeto real)
+
+Com pequenos upgrades, isso vira facilmente um **backend de API bancária**.
+
+---
