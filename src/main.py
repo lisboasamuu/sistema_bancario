@@ -1,4 +1,4 @@
-from banco import Banco
+from .banco import Banco
 
 def main():
     banco = Banco()
@@ -20,22 +20,22 @@ def main():
             print('\nO 🏦 SISTEMA BANCÁRIO LISBOA AGRADECE!\n')
             break
         elif opcao == '1':
-            cpf = input('insira seu cpf: ').strip()
-            nome = input('insira seu nome: ').strip()
+            cpf = input("CPF: ").strip()
+            nome = input('insira o nome: ').strip()
             banco.criar_conta(cpf, nome)
         elif opcao == '2':
             cpf = input('insira o CPF do titular: ').strip()
             valor = float(input('Insira o valor que deseja depositar: '))
             banco.depositar(cpf, valor)
         elif opcao == '3':
-            cpf = input('insira seu cpf: ').strip()
+            cpf = input('insira o cpf: ').strip()
             valor_saque = float(input('Insira o valor que deseja sacar: '))
             banco.saque(cpf, valor_saque)
         elif opcao == '4':
-            cpf = input('insira seu cpf da conta que deseja ver o saldo: ').strip()
+            cpf = input('insira o cpf da conta que deseja ver o saldo: ').strip()
             banco.exibir_saldo(cpf)
         elif opcao == '5':
-            cpf = input('insira seu cpf: ').strip()
+            cpf = input('insira o cpf: ').strip()
             banco.exibir_historico(cpf)
         elif opcao == '6':
             cpf_origem = input('Informe o CPF da conta de origem da transferência: ')

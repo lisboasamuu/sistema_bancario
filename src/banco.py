@@ -1,5 +1,6 @@
-from storage import JSONStorage
-from conta import Conta
+from .storage import JSONStorage
+from .conta import Conta
+from .utils import normalizar_cpf
 
 class Banco:
     def __init__(self, arquivo_dados='data/banco_dados.json'):
@@ -8,6 +9,7 @@ class Banco:
         self.carregar_dados()
 
     def criar_conta(self, cpf, nome):
+        cpf = normalizar_cpf(cpf)
         if cpf in self.contas:
                 print(f"Já existe uma conta com o CPF {cpf}.")
                 return None
@@ -18,6 +20,7 @@ class Banco:
         return conta
     
     def depositar(self, cpf, valor):
+        conta = self.obter_conta(cpf)
         conta = self.contas.get(cpf)
         if not conta:
             print('Conta não encontrada')
@@ -26,6 +29,7 @@ class Banco:
         self.salvar_dados()
 
     def saque(self, cpf, valor):
+        conta = self.obter_conta(cpf)
         conta = self.contas.get(cpf)
         if not conta:
             print('Conta não encontrada')
@@ -34,22 +38,26 @@ class Banco:
         self.salvar_dados()
 
     def obter_conta(self, cpf):
+        cpf = normalizar_cpf(cpf)
         return self.contas.get(cpf)
 
-
     def exibir_saldo(self, cpf):
+        conta = self.obter_conta(cpf)
         conta = self.obter_conta(cpf)
         if conta:
             conta.exibir_saldo() 
 
     def exibir_historico(self, cpf):
         conta = self.obter_conta(cpf)
+        conta = self.obter_conta(cpf)
         if conta:
             conta.exibir_historico()
 
-    def transferir(self, cpf_origem, cpf_destino, valor):
-        modalidade = input('Qual a modalide do pagamento? ').strip()
-        if modalidade == '':
+    def transferir(self, cpf_origem, cpf_destino, valor, modalidade):
+        cpf_origem = normalizar_cpf(cpf_origem)
+        cpf_destino = normalizar_cpf(cpf_destino)
+
+        if not modalidade.strip():
             print('Informe a modalidade!')
             return False        
         #localiza as contas
@@ -76,11 +84,19 @@ class Banco:
         #salvamento do dado
         self.salvar_dados()
         #adicionando ao historico
-        conta_origem.historico.append(f'{modalidade} enviada para {cpf_destino} no valor de {valor}')
-        conta_destino.historico.append(f'{modalidade}a recebida de {cpf_origem} no valor de {valor}')
+        conta_origem.historico.append(f'{modalidade} enviada para {cpf_destino} no valor de R$ {valor:.2f}')
+        conta_destino.historico.append(f'{modalidade} recebida de {cpf_origem} no valor de R$ {valor:.2f}')
 
         print(f'{modalidade} realizada com sucesso!')
         print(f'De: {conta_origem.titular} para {conta_destino.titular}')
+
+    def listar_contas(self):
+        if not self.contas:
+            print("📭 Nenhuma conta cadastrada.")
+        else:
+            print("\n📋 Contas cadastradas:")
+            for cpf, conta in self.contas.items():
+                print(f"   CPF: {cpf} | Titular: {conta.titular} | Saldo: R$ {conta.saldo:.2f}")
 
 # --- PERSISTENCIA DE DADOS 
 #             

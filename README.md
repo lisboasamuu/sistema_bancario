@@ -1,173 +1,184 @@
 # 🏦 Sistema Bancário em Python
 
-Sistema simples de gerenciamento bancário com persistência de dados em JSON, desenvolvido para estudo de:
+> 💡 Projeto com arquitetura preparada para evolução em API REST ou aplicação desktop completa.
 
-* Programação Orientada a Objetos (POO)
-* Manipulação de arquivos
-* Estruturação de projetos reais em Python
+Sistema de gerenciamento bancário com **duas interfaces (CLI e GUI)** e **persistência em JSON**.
+
+Projeto desenvolvido com foco em:
+- Programação Orientada a Objetos (POO)
+- Estruturação de projetos reais em Python
+- Manipulação de arquivos e serialização (JSON)
+- Interface gráfica com Tkinter
 
 ---
 
 ## ✨ Funcionalidades
 
-* Criar conta (CPF e nome do titular)
-* Depositar valores
-* Sacar valores (com verificação de saldo)
-* Transferir valores entre contas
-* Consultar saldo
-* Visualizar histórico de movimentações
-* Listar todas as contas cadastradas
-* Persistência automática em JSON
-* Carregamento automático ao iniciar
+- Criar conta (CPF + nome)
+- Depositar valores
+- Sacar com validação de saldo
+- Transferir entre contas
+- Consultar saldo
+- Visualizar histórico de transações
+- Listar contas cadastradas
+
+### 🔄 Persistência automática
+- Salvamento após cada operação
+- Carregamento automático ao iniciar
+
+### 🖥️ Interfaces disponíveis
+- CLI (terminal com menu numérico)
+- GUI (interface gráfica com Tkinter)
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## 🛠️ Tecnologias
 
-* Python 3.10+
-* Módulo `json` (nativo)
-* Sem dependências externas
+- Python 3.10+
+- json (persistência de dados)
+- tkinter (GUI nativa)
+- Sem dependências externas
 
 ---
 
-## 📁 Estrutura do projeto
+## 📁 Estrutura do Projeto
 
-```
 sistema_bancario/
 ├── src/
-│   ├── __init__.py
-│   ├── main.py
 │   ├── banco.py
 │   ├── conta.py
 │   ├── storage.py
-│   └── utils.py
+│   ├── utils.py
+│   ├── main.py
+│   └── gui.py
 │
 ├── data/
 │   └── banco_dados.json
 │
-├── tests/              # (Opcional)
+├── tests/
+├── run.py
+├── run_gui.py
 ├── README.md
 ├── LICENSE
-├── .gitignore
-├── .gitattributes
-└── run.py
-```
+└── .gitignore
 
 ---
 
-## 🚀 Como executar
+## 🚀 Como Executar
 
 ### 1. Clone o repositório
 
-```bash
 git clone https://github.com/seu-usuario/sistema_bancario.git
 cd sistema_bancario
-```
 
-### 2. Execute o projeto
+### 2. Escolha a interface
 
-```bash
+#### 🖥️ Terminal
+
 python run.py
-```
 
-Ou:
+ou
 
-```bash
 python -m src.main
-```
+
+#### 🖱️ Interface gráfica
+
+python run_gui.py
+
+ou
+
+python -m src.gui
 
 ---
 
-## 🧭 Menu do sistema
+## 🧭 Uso
 
-```
-==================================================
-          🏦 SISTEMA BANCÁRIO
-==================================================
-1️⃣  Criar nova conta
-2️⃣  Depositar
-3️⃣  Sacar
-4️⃣  Transferir
-5️⃣  Consultar saldo
-6️⃣  Ver histórico de movimentações
-7️⃣  Listar todas as contas
-0️⃣  Sair
-==================================================
-```
+### CLI (Terminal)
+
+1 - Criar conta  
+2 - Depositar  
+3 - Sacar  
+4 - Transferir  
+5 - Consultar saldo  
+6 - Ver histórico  
+7 - Listar contas  
+0 - Sair  
+
+### GUI
+
+- Interface com botões para cada operação
+- Inputs via janelas secundárias
+- Feedback com pop-ups
+- Salvamento automático
 
 ---
 
-## 💾 Persistência de dados
+## 💾 Persistência
 
-* Os dados são salvos automaticamente em:
+Arquivo de dados:
 
-  ```
-  data/banco_dados.json
-  ```
+data/banco_dados.json
 
-* O salvamento ocorre após:
-
-  * Criar conta
-  * Depositar
-  * Sacar
-  * Transferir
-
-* Ao iniciar o sistema:
-
-  * O arquivo JSON é carregado automaticamente (se existir)
-
-* O JSON é legível e pode ser editado manualmente ⚠️ (com cuidado)
+- Atualizado automaticamente
+- Pode ser editado manualmente (com cautela)
 
 ---
 
 ## 🔧 Requisitos
 
-* Python 3.10 ou superior
-  *(testado com Python 3.12)*
+- Python 3.10+
 
 ---
 
-## 🐛 Possíveis problemas e soluções
+## 🐛 Problemas comuns
 
-| Problema                                  | Solução                                                                               |
-| ----------------------------------------- | ------------------------------------------------------------------------------------- |
-| `KeyError: 'historico'` ao carregar dados | JSON antigo. Apague `data/banco_dados.json` ou adicione `"historico": []` manualmente |
-| Valores negativos em operações            | O sistema bloqueia automaticamente e exibe erro                                       |
+Problema: KeyError: 'historico'  
+Solução: Recrie o JSON ou adicione "historico": []
 
----
+Problema: Botões estranhos na GUI  
+Solução: Use tk.Button em vez de ttk.Button
 
-## 📝 Licença
-
-Este projeto está sob a licença **MIT**.
-Consulte o arquivo `LICENSE` para mais detalhes.
-
----
-
-## 👤 Autor
-
-**Samuel Lisboa**
-GitHub: @lisboasamuu
+Problema: CPF não encontrado  
+Solução: O sistema remove formatação automaticamente
 
 ---
 
 ## 📌 Melhorias futuras
 
-* Limite de transferências por dia
-* Geração de extrato em PDF
-* Interface gráfica (Tkinter ou PyQt)
-* Tipos de conta (corrente/poupança)
-* Autenticação por senha
+- Limite de transferências por dia
+- Exportação de extrato em PDF
+- Autenticação por senha
+- Tipos de conta (corrente/poupança)
+- API REST (Flask ou FastAPI)
 
 ---
 
-## 🧠 Observação técnica
+## 🧠 Arquitetura
 
-Esse projeto já demonstra:
+- Separação de responsabilidades:
+  - Banco → regras de negócio
+  - Conta → operações e histórico
+  - Storage → persistência
 
-* Separação de responsabilidades (Banco vs Conta vs Storage)
-* Persistência desacoplada
-* Estrutura modular (nível de projeto real)
-
-Com pequenos upgrades, isso vira facilmente um **backend de API bancária**.
+- Baixo acoplamento
+- Estrutura pronta para escalar
+- Reutilização da lógica entre CLI e GUI
 
 ---
+
+## 👤 Autor
+
+Samuel Lisboa  
+https://github.com/lisboasamuu
+
+---
+
+## 📄 Licença
+
+MIT License
+
+---
+
+## 🤝 Contribuição
+
+Pull requests e sugestões são bem-vindos.

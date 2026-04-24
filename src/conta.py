@@ -31,6 +31,8 @@ class Conta:
 
     def exibir_historico(self):
         print(f'Historico de {self.titular}:')
+        if not self.historico:
+            print('Conta ainda sem histórico')
         for operacao in self.historico:
             print(f' {operacao}')
 
