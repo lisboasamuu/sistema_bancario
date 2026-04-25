@@ -81,14 +81,15 @@ class Banco:
         #realização da transferencia
         conta_origem.saldo -= valor
         conta_destino.saldo += valor
-        #salvamento do dado
-        self.salvar_dados()
+
         #adicionando ao historico
-        conta_origem.historico.append(f'{modalidade} enviada para {cpf_destino} no valor de R$ {valor:.2f}')
-        conta_destino.historico.append(f'{modalidade} recebida de {cpf_origem} no valor de R$ {valor:.2f}')
+        conta_origem.historico.append(f'{modalidade} enviado para {conta_destino.titular} no valor de R$ {valor:.2f}')
+        conta_destino.historico.append(f'{modalidade} recebido de {conta_origem.titular} no valor de R$ {valor:.2f}')
 
         print(f'{modalidade} realizada com sucesso!')
         print(f'De: {conta_origem.titular} para {conta_destino.titular}')
+                #salvamento do dado
+        self.salvar_dados()
 
     def listar_contas(self):
         if not self.contas:

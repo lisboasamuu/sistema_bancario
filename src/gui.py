@@ -229,7 +229,7 @@ class BancoGUI:
         cpf = self.obter_cpf("CPF da conta para ver histórico:")
         if not cpf:
             return
-        _, saida = self.capturar_saida(self.banco.ver_historico, cpf)
+        _, saida = self.capturar_saida(self.banco.exibir_historico, cpf)
         if "Conta não encontrada" in saida or not saida.strip():
             self.mostrar_mensagem("Erro", saida if saida else "Conta não encontrada.", erro=True)
         else:
